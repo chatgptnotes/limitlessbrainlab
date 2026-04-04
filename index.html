@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Limitless Brain Lab — The Future of Personalized Brain Care</title>
+  <meta name="description" content="Comprehensive brain health solutions targeting stress management, enhanced focus, improved mood and memory, better sleep, and preventive care for optimal brain wellness." />
+  <link rel="icon" href="/IBW Logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Animations */
+    @keyframes slideUp { from { opacity:0; transform:translateY(30px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes slideDown { from { opacity:0; transform:translateY(-30px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes slideInLeft { from { opacity:0; transform:translateX(-50px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes slideInRight { from { opacity:0; transform:translateX(50px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes fadeInUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes heroSlideLeft { from { opacity:0; transform:translateX(-60px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes heroSlideRight { from { opacity:0; transform:translateX(60px); } to { opacity:1; transform:translateX(0); } }
+    @keyframes bounce-smooth { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+    @keyframes brainwave { 0%,100% { transform:scaleX(1) scaleY(1); opacity:.8; } 50% { transform:scaleX(1.05) scaleY(.95); opacity:1; } }
+    @keyframes neuronPulse { 0%,100% { opacity:.6; transform:scale(.98); } 50% { opacity:1; transform:scale(1.02); } }
+    @keyframes blob { 0%,100% { transform:translate(0,0) scale(1); } 33% { transform:translate(30px,-50px) scale(1.1); } 66% { transform:translate(-20px,20px) scale(.9); } }
+    @keyframes marquee-scroll { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+    @keyframes logo-reveal { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+
+    .animate-slide-up { animation: slideUp .8s ease-out forwards; }
+    .animate-slide-down { animation: slideDown .8s ease-out forwards; }
+    .animate-slide-in-left { animation: slideInLeft .8s ease-out forwards; }
+    .animate-slide-in-right { animation: slideInRight .8s ease-out forwards; }
+    .animate-fade-in-up { animation: fadeInUp .8s ease-out forwards; }
+    .animate-brainwave { animation: brainwave 3s ease-in-out infinite; }
+    .animate-neuron { animation: neuronPulse 2.5s ease-in-out infinite; }
+    .animate-blob { animation: blob 7s infinite; }
+    .animate-marquee-scroll { animation: marquee-scroll 30s linear infinite; }
+    .animate-logo-reveal { animation: logo-reveal .6s ease-out forwards; }
+
+    .delay-200 { animation-delay:.2s; }
+    .delay-400 { animation-delay:.4s; }
+    .delay-600 { animation-delay:.6s; }
+    .delay-800 { animation-delay:.8s; }
+
+    /* Scroll fade classes — activated by JS */
+    .scroll-fade-up, .scroll-fade-down, .scroll-fade-left, .scroll-fade-right { opacity:0; transition: opacity .8s ease-out, transform .8s ease-out; }
+    .scroll-fade-up { transform:translateY(40px); }
+    .scroll-fade-down { transform:translateY(-40px); }
+    .scroll-fade-left { transform:translateX(-40px); }
+    .scroll-fade-right { transform:translateX(40px); }
+    .scroll-fade-up.visible, .scroll-fade-down.visible, .scroll-fade-left.visible, .scroll-fade-right.visible { opacity:1; transform:translate(0,0); }
+
+    /* Brain parameters slider */
+    .scrollbar-hide::-webkit-scrollbar { display:none; }
+    .scrollbar-hide { -ms-overflow-style:none; scrollbar-width:none; }
+
+    /* Hover shine */
+    .hover-shine { position:relative; overflow:hidden; }
+    .hover-shine::before { content:''; position:absolute; top:0; left:-75%; width:50%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent); transform:skewX(-25deg); transition:left .6s ease; z-index:20; }
+    .hover-shine:hover::before { left:125%; }
+
+    /* Mobile menu */
+    #mobile-menu { transform:translateY(-100%); transition:transform .3s ease; }
+    #mobile-menu.open { transform:translateY(0); }
+  </style>
+</head>
+<body class="w-full min-h-screen bg-white m-0 p-0 overflow-x-hidden font-sans text-gray-900">
+
+  <!-- Navigation Bar -->
+  <nav class="fixed top-0 left-0 right-0 z-50 py-3 sm:py-4 px-4 sm:px-6 bg-white/80 backdrop-blur-sm lg:bg-transparent lg:backdrop-blur-none">
+    <div class="max-w-7xl mx-auto flex items-center justify-center">
+      <!-- Desktop Nav Pill -->
+      <div class="hidden lg:flex items-center bg-white/95 backdrop-blur-lg rounded-full shadow-lg px-6 py-3 gap-6 border border-gray-100">
+        <div class="flex items-center justify-center pr-4 border-r border-gray-200">
+          <img src="/IBW Logo.png" alt="Limitless Brain Lab Logo" style="height:70px;width:70px;border-radius:50%;object-fit:cover;" />
+        </div>
+        <a href="#start" class="text-gray-700 hover:text-gray-900 text-base font-semibold transition-colors whitespace-nowrap">Home</a>
+        <a href="#how-it-works" class="text-gray-700 hover:text-gray-900 text-base font-semibold transition-colors whitespace-nowrap">How It Works</a>
+        <a href="#our-method" class="text-gray-700 hover:text-gray-900 text-base font-semibold transition-colors whitespace-nowrap">Our Method</a>
+        <a href="https://wa.me/971501382897?text=Hi%2C%20I%27m%20interested%20in%20Limitless%20Brain%20Lab%20services" target="_blank" rel="noopener noreferrer" class="px-5 py-2 bg-[#323956] text-white rounded-xl text-base font-semibold hover:bg-[#252a45] transition-colors whitespace-nowrap shadow-md">Unlock My Brain</a>
+      </div>
+      <!-- Mobile Nav -->
+      <div class="lg:hidden flex items-center justify-between w-full px-1">
+        <a href="#start"><img src="/IBW Logo.png" alt="Logo" class="h-9 w-9 object-contain rounded-full" /></a>
+        <button onclick="document.getElementById('mobile-menu').classList.toggle('open')" class="p-2 text-gray-800 hover:bg-gray-100 rounded-full transition-all">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="fixed top-0 left-0 right-0 bg-white z-50 lg:hidden shadow-2xl rounded-b-2xl">
+    <div class="flex items-center justify-between px-4 py-3">
+      <a href="#start" onclick="document.getElementById('mobile-menu').classList.remove('open')"><img src="/IBW Logo.png" alt="Logo" class="h-9 w-9 object-contain rounded-full" /></a>
+      <button onclick="document.getElementById('mobile-menu').classList.remove('open')" class="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-full transition-colors">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="px-5 pb-6">
+      <div class="flex flex-col space-y-1">
+        <a href="#start" onclick="document.getElementById('mobile-menu').classList.remove('open')" class="text-gray-900 hover:text-[#323956] hover:bg-gray-50 text-base font-semibold py-3 px-3 rounded-lg">Home</a>
+        <a href="#how-it-works" onclick="document.getElementById('mobile-menu').classList.remove('open')" class="text-gray-900 hover:text-[#323956] hover:bg-gray-50 text-base font-semibold py-3 px-3 rounded-lg">How It Works</a>
+        <a href="#our-method" onclick="document.getElementById('mobile-menu').classList.remove('open')" class="text-gray-900 hover:text-[#323956] hover:bg-gray-50 text-base font-semibold py-3 px-3 rounded-lg">Our Method</a>
+      </div>
+      <a href="https://wa.me/971501382897?text=Hi%2C%20I%27m%20interested%20in%20Limitless%20Brain%20Lab%20services" target="_blank" rel="noopener noreferrer" class="mt-5 block px-6 py-3 bg-[#323956] text-white rounded-xl text-base font-semibold hover:bg-[#252a45] transition-colors text-center shadow-md w-full">Unlock My Brain</a>
+    </div>
+  </div>
+
+  <!-- ============ HERO SECTION ============ -->
+  <section id="start" class="relative w-full bg-white pt-2 sm:pt-3 pb-4 sm:pb-6 px-2 sm:px-3 md:px-3 lg:px-4">
+    <div class="w-[96%] sm:w-[98%] lg:w-[99.5%] mx-auto relative overflow-hidden rounded-[1.2rem] sm:rounded-[2rem] md:rounded-[2.5rem] lg:rounded-[3rem] border border-gray-200/60" style="min-height:clamp(350px,50vh,500px)">
+      <div class="absolute inset-0 bg-[#EEF0F5]"></div>
+      <section class="relative z-10 h-full flex items-center px-3 sm:px-6 md:px-12 lg:px-20 py-8 sm:py-12 md:py-14">
+        <div class="flex flex-col-reverse lg:flex-row items-center justify-between w-full gap-8 lg:gap-12">
+          <!-- Left Text -->
+          <div class="max-w-full sm:max-w-2xl lg:max-w-xl flex-shrink-0" style="animation:heroSlideLeft 1s ease-out forwards">
+            <div class="mb-5 sm:mb-8">
+              <div class="text-center lg:text-left">
+                <h1 class="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 mb-3 sm:mb-6">The Future Of Personalized Brain Care Is Here</h1>
+              </div>
+              <div class="text-center lg:text-left">
+                <h5 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 mb-6 sm:mb-8" style="letter-spacing:.05em">UNLOCK &amp; TRANSFORM YOUR BRAIN AT LIMITLESS BRAIN LAB</h5>
+              </div>
+              <div class="mt-4 sm:mt-6 animate-fade-in-up delay-400">
+                <p class="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 leading-relaxed max-w-2xl text-center sm:text-left">Comprehensive brain health solutions targeting stress management, enhanced focus, improved mood and memory, better sleep, and preventive care for optimal brain wellness. Blending the wisdom of yoga, pranayama, and sacred sound practices with modern neuroscience to create a truly holistic brain health experience.</p>
+              </div>
+            </div>
+            <!-- CTA Buttons -->
+            <div class="flex flex-row gap-2 sm:gap-4 justify-center lg:justify-start">
+              <a href="https://w.app/protectmybrain" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap bg-[#323956] hover:bg-[#232D3C] text-white px-4 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl text-xs sm:text-base md:text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-md text-center animate-slide-in-left delay-600">PROTECT MY BRAIN</a>
+              <a href="https://w.app/treatmybrain" target="_blank" rel="noopener noreferrer" class="whitespace-nowrap bg-gray-900 hover:bg-black text-white px-4 sm:px-8 py-3 sm:py-4 rounded-lg sm:rounded-xl text-xs sm:text-base md:text-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg text-center animate-slide-in-right delay-600">TREAT MY BRAIN</a>
+            </div>
+            <!-- Trust Bar -->
+            <div class="mt-6 sm:mt-8 animate-fade-in-up delay-800">
+              <p class="text-gray-500 text-xs sm:text-base text-center lg:text-left mb-2 sm:mb-3">Trusted by Over <span class="font-bold text-gray-800">50K+</span> Customers</p>
+              <div class="flex items-center justify-center lg:justify-start gap-2 sm:gap-4">
+                <div class="flex items-center gap-1.5 sm:gap-3 bg-gray-100 backdrop-blur-sm rounded-full px-2.5 py-1.5 sm:px-6 sm:py-3">
+                  <svg class="w-5 h-5 sm:w-8 sm:h-8 flex-shrink-0" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+                  <div class="flex flex-col">
+                    <div class="flex items-center gap-0.5 sm:gap-1">
+                      <span class="text-gray-800 font-bold text-sm sm:text-lg">5.0</span>
+                      <div class="flex gap-0.5">
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                        <svg class="w-3 h-3 sm:w-4 sm:h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                      </div>
+                    </div>
+                    <span class="text-gray-400 text-[9px] sm:text-sm">442 Google reviews</span>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 sm:gap-8">
+                  <div class="text-center"><p class="text-gray-800 font-bold text-sm sm:text-2xl">50K+</p><p class="text-gray-400 text-[9px] sm:text-sm">Customers</p></div>
+                  <div class="text-center"><p class="text-gray-800 font-bold text-sm sm:text-2xl">5k+</p><p class="text-gray-400 text-[9px] sm:text-sm">Brain maps</p></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Right: Dr. Sweta Image -->
+          <div class="flex flex-shrink-0 flex-col items-center justify-end relative" style="animation:heroSlideRight 1s ease-out .3s forwards;opacity:0">
+            <img src="/dr.sweta-removebg-preview.png" alt="Dr. Sweta" class="w-[160px] sm:w-[280px] md:w-[350px] lg:w-[420px] xl:w-[500px] max-w-[80vw] h-auto object-contain drop-shadow-2xl" />
+            <div class="flex items-start justify-center gap-5 mt-4">
+              <div class="flex flex-col items-center text-center">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"/></svg>
+                <p class="text-gray-800 font-bold text-xs sm:text-sm">50000+</p>
+                <p class="text-gray-400 text-[9px] sm:text-[10px]">Patients Treated</p>
+              </div>
+              <div class="flex flex-col items-center text-center">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 mb-1" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-4.5A3.375 3.375 0 0012.75 10.5h-1.5A3.375 3.375 0 007.5 14.25v4.5m4.5-12V3.75m0 3a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z"/></svg>
+                <p class="text-gray-800 font-bold text-xs sm:text-sm">13+</p>
+                <p class="text-gray-400 text-[9px] sm:text-[10px]">Gold Medals</p>
+              </div>
+              <div class="flex flex-col items-center text-center">
+                <svg class="w-4 h-4 sm:w-5 sm:h-5 text-gray-700 mb-1" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                <p class="text-gray-800 font-bold text-xs sm:text-sm">30 Million</p>
+                <p class="text-gray-400 text-[9px] sm:text-[10px] leading-tight">+ <br/>Views Various social<br/>media</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Scroll Arrow -->
+      <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 hidden sm:block">
+        <svg class="h-6 w-6 text-gray-400" style="animation:bounce-smooth 2s ease-in-out infinite" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FEATURED ON ============ -->
+  <section class="py-20 sm:py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#323956] text-center mb-12 tracking-tight scroll-fade-down">CHANGING ONE BRAIN AT A TIME</h2>
+      <div class="py-6 px-4 overflow-hidden">
+        <div class="flex items-center justify-center gap-6 sm:gap-10 md:gap-14 lg:gap-20 flex-wrap mx-auto">
+          <img src="/tedx-logo.png" alt="TEDx" class="h-6 sm:h-8 md:h-12 w-auto object-contain transform transition-all duration-500 hover:scale-110 animate-logo-reveal" style="animation-delay:0ms" />
+          <img src="/gulf news.png" alt="Gulf News" class="h-6 sm:h-8 md:h-12 w-auto object-contain transform transition-all duration-500 hover:scale-110 animate-logo-reveal" style="animation-delay:200ms" />
+          <img src="/dubaione.png" alt="Dubai One" class="h-6 sm:h-8 md:h-12 w-auto object-contain transform transition-all duration-500 hover:scale-110 animate-logo-reveal" style="animation-delay:400ms" />
+          <img src="/toi.png" alt="TOI" class="h-6 sm:h-8 md:h-12 w-auto object-contain transform transition-all duration-500 hover:scale-110 animate-logo-reveal" style="animation-delay:600ms" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PROTECT & TREAT CARDS ============ -->
+  <section class="py-16 sm:py-20 md:py-24 bg-gradient-to-b from-[#f8f9fc] to-white relative overflow-hidden">
+    <div class="absolute top-0 left-0 w-72 h-72 bg-[#c9a227]/5 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/3"></div>
+    <div class="absolute bottom-0 right-0 w-72 h-72 bg-cyan-500/5 rounded-full blur-3xl translate-x-1/2 translate-y-1/3"></div>
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center mb-14 scroll-fade-down">
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-bold text-[#323956] mb-4">Your Brain. Your Choice.</h2>
+        <p class="text-gray-500 text-base sm:text-lg max-w-2xl mx-auto">Whether you want to safeguard your cognitive future or address existing concerns, we have a path for you.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <!-- Protect Card -->
+        <div class="group bg-white rounded-2xl p-5 sm:p-8 md:p-10 flex flex-col border-2 border-[#c9a227]/20 hover:border-[#c9a227]/60 transition-all duration-500 hover:shadow-2xl hover:shadow-[#c9a227]/10 shadow-lg hover:-translate-y-1 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#c9a227] to-[#e5c04d]"></div>
+          <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-[#c9a227]/15 to-[#c9a227]/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-[#c9a227]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-[#323956] mb-3">Protect My Brain</h3>
+          <p class="text-gray-500 mb-6 leading-relaxed text-sm sm:text-[15px]">Optimize before decline. Protect before disease. Take proactive steps to safeguard your brain's peak performance.</p>
+          <ul class="space-y-3.5 mb-8 flex-grow">
+            <li class="flex items-center gap-3 text-gray-700 text-sm sm:text-[15px]"><span class="w-2 h-2 rounded-full bg-[#c9a227] flex-shrink-0"></span>Detect early stress patterns</li>
+            <li class="flex items-center gap-3 text-gray-700 text-sm sm:text-[15px]"><span class="w-2 h-2 rounded-full bg-[#c9a227] flex-shrink-0"></span>Monitor cognitive function</li>
+            <li class="flex items-center gap-3 text-gray-700 text-sm sm:text-[15px]"><span class="w-2 h-2 rounded-full bg-[#c9a227] flex-shrink-0"></span>Build neural resilience</li>
+            <li class="flex items-center gap-3 text-gray-700 text-sm sm:text-[15px]"><span class="w-2 h-2 rounded-full bg-[#c9a227] flex-shrink-0"></span>Neuro-regulation techniques</li>
+          </ul>
+          <a href="https://w.app/protectmybrain" target="_blank" rel="noopener noreferrer" class="w-full py-4 rounded-xl bg-gradient-to-r from-[#c9a227] to-[#d4b03a] hover:from-[#b8911f] hover:to-[#c9a227] text-white font-semibold text-lg transition-all duration-300 hover:shadow-lg hover:shadow-[#c9a227]/30 transform hover:scale-[1.02] text-center block">Protect My Brain</a>
+        </div>
+        <!-- Treat Card -->
+        <div class="group bg-white rounded-2xl p-5 sm:p-8 md:p-10 flex flex-col border-2 border-cyan-400/20 hover:border-cyan-400/60 transition-all duration-500 hover:shadow-2xl hover:shadow-cyan-500/10 shadow-lg hover:-translate-y-1 relative overflow-hidden">
+          <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-cyan-400 to-blue-500"></div>
+          <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-cyan-500/15 to-cyan-500/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-7 h-7 text-cyan-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <h3 class="text-2xl font-bold text-[#323956] mb-3">Treat My Brain</h3>
+          <p class="text-gray-500 mb-6 leading-relaxed text-sm sm:text-[15px]">Comprehensive Integrative Neuromodulation. Address existing neurological and cognitive challenges head-on.</p>
+          <ul class="space-y-3.5 mb-8 flex-grow">
+            <li class="flex items-center gap-3 text-gray-700 text-sm sm:text-[15px]"><span class="w-2 h-2 rounded-full bg-cyan-500 flex-shrink-0"></span>Dementia and Memory</li>
+            <li class="flex items-center gap-3 text-gray-700 text-sm sm:text-[15px]"><span class="w-2 h-2 rounded-full bg-cyan-500 flex-shrink-0"></span>ADHD &amp; Attention Disorders</li>
+            <li class="flex items-center gap-3 text-gray-700 text-sm sm:text-[15px]"><span class="w-2 h-2 rounded-full bg-cyan-500 flex-shrink-0"></span>Insomnia &amp; sleep issues</li>
+            <li class="flex items-center gap-3 text-gray-700 text-sm sm:text-[15px]"><span class="w-2 h-2 rounded-full bg-cyan-500 flex-shrink-0"></span>Learning Disabilities</li>
+          </ul>
+          <a href="https://w.app/treatmybrain" target="_blank" rel="noopener noreferrer" class="w-full py-4 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 hover:from-cyan-500 hover:to-cyan-600 text-white font-semibold text-lg transition-all duration-300 hover:shadow-lg hover:shadow-cyan-500/30 transform hover:scale-[1.02] text-center block">Treat My Brain</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ WHY BRAIN FITNESS ============ -->
+  <section class="py-16 sm:py-20 md:py-24 bg-white relative overflow-hidden">
+    <div class="absolute top-[-10%] left-[-5%] w-[400px] h-[400px] bg-[#c9a227]/[0.04] rounded-full blur-[100px]"></div>
+    <div class="absolute bottom-[-10%] right-[-5%] w-[350px] h-[350px] bg-[#323956]/[0.04] rounded-full blur-[100px]"></div>
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="text-center scroll-fade-down">
+        <div class="inline-flex items-center gap-2 bg-[#323956] text-white text-xs sm:text-sm font-medium px-5 py-2 rounded-full mb-6">
+          <svg class="w-4 h-4 text-[#c9a227]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+          Think About It
+        </div>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#323956] mb-3 tracking-tight">Why Brain Fitness?</h2>
+        <p class="text-lg sm:text-xl text-gray-400 mb-14 sm:mb-16">You regularly test your:</p>
+      </div>
+      <!-- Health Cards -->
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3 sm:gap-5 mb-14 sm:mb-16 scroll-fade-up">
+        <div class="group relative bg-red-50 border border-gray-100 rounded-2xl p-5 sm:p-6 flex flex-col items-center text-center hover:-translate-y-2 hover:shadow-xl hover:shadow-red-200/60 transition-all duration-500 cursor-default">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-red-500 to-rose-600 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+          </div>
+          <span class="text-[#323956] font-semibold text-sm sm:text-base">Heart</span>
+        </div>
+        <div class="group relative bg-orange-50 border border-gray-100 rounded-2xl p-5 sm:p-6 flex flex-col items-center text-center hover:-translate-y-2 hover:shadow-xl hover:shadow-orange-200/60 transition-all duration-500 cursor-default">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-orange-500 to-amber-600 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+          </div>
+          <span class="text-[#323956] font-semibold text-sm sm:text-base">Liver</span>
+        </div>
+        <div class="group relative bg-sky-50 border border-gray-100 rounded-2xl p-5 sm:p-6 flex flex-col items-center text-center hover:-translate-y-2 hover:shadow-xl hover:shadow-sky-200/60 transition-all duration-500 cursor-default">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+          </div>
+          <span class="text-[#323956] font-semibold text-sm sm:text-base">Kidney</span>
+        </div>
+        <div class="group relative bg-violet-50 border border-gray-100 rounded-2xl p-5 sm:p-6 flex flex-col items-center text-center hover:-translate-y-2 hover:shadow-xl hover:shadow-violet-200/60 transition-all duration-500 cursor-default">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-violet-500 to-purple-600 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+          </div>
+          <span class="text-[#323956] font-semibold text-sm sm:text-base">Blood Sugar</span>
+        </div>
+        <div class="group relative bg-emerald-50 border border-gray-100 rounded-2xl p-5 sm:p-6 flex flex-col items-center text-center hover:-translate-y-2 hover:shadow-xl hover:shadow-emerald-200/60 transition-all duration-500 cursor-default">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-teal-600 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>
+          </div>
+          <span class="text-[#323956] font-semibold text-sm sm:text-base">Vitamins</span>
+        </div>
+        <div class="group relative bg-pink-50 border border-gray-100 rounded-2xl p-5 sm:p-6 flex flex-col items-center text-center hover:-translate-y-2 hover:shadow-xl hover:shadow-pink-200/60 transition-all duration-500 cursor-default">
+          <div class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br from-pink-500 to-fuchsia-600 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg">
+            <svg class="w-7 h-7 sm:w-8 sm:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+          </div>
+          <span class="text-[#323956] font-semibold text-sm sm:text-base">Thyroid</span>
+        </div>
+      </div>
+      <!-- Brain Fitness Question -->
+      <div class="text-center scroll-fade-up">
+        <div class="relative max-w-4xl mx-auto">
+          <div class="absolute -inset-1 bg-gradient-to-r from-[#c9a227]/40 via-[#c9a227]/20 to-[#c9a227]/40 rounded-[28px] blur-sm"></div>
+          <div class="relative bg-white rounded-3xl py-8 sm:py-10 md:py-14 px-4 sm:px-8 md:px-12">
+            <div class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 rounded-full bg-gradient-to-br from-[#323956] to-[#4a5280] flex items-center justify-center mx-auto mb-6 shadow-xl shadow-[#323956]/30">
+              <svg class="w-8 h-8 sm:w-10 sm:h-10 text-[#c9a227]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <h3 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#323956] mb-3 sm:mb-4">But have you ever tested your <span class="text-[#c9a227]">Brain Fitness</span>?</h3>
+            <div class="flex items-center justify-center gap-3 mb-5 sm:mb-6">
+              <div class="w-10 h-[2px] bg-gradient-to-r from-transparent to-[#c9a227]"></div>
+              <div class="w-2 h-2 rounded-full bg-[#c9a227]"></div>
+              <div class="w-10 h-[2px] bg-gradient-to-l from-transparent to-[#c9a227]"></div>
+            </div>
+            <p class="text-gray-500 text-base sm:text-lg md:text-xl leading-relaxed max-w-2xl mx-auto">For the first time in India, you can measure your brain's functional health through a clinical-grade <span class="font-bold text-[#323956]">Quantitative EEG (qEEG)</span> brain optimization scan.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CTA + CRISIS + SOLUTION + PHILOSOPHY ============ -->
+  <section id="how-it-works" class="py-12 sm:py-16 md:py-20 bg-white relative">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+
+      <!-- CTA -->
+      <div class="text-center mb-20 scroll-fade-up">
+        <h2 class="text-4xl sm:text-5xl font-bold text-[#323956] mb-6">Take Control Of Your Brain Health Today</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-10">Join thousands who have transformed their lives by adopting a brain-first approach, understanding and optimizing the brain's power to enhance mental strength, emotional balance, and overall well-being.</p>
+        <a href="https://wa.me/971501382897?text=Hi%2C%20I%27m%20interested%20in%20Limitless%20Brain%20Lab%20services" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#323956] hover:bg-[#232D3C] text-white rounded-xl text-lg font-medium transition-all hover:scale-105 shadow-lg">
+          Start Your Journey
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Crisis Stats -->
+      <div class="my-20">
+        <div class="text-center mb-12 scroll-fade-down">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#323956] mb-3 sm:mb-4">The Global Brain Health Crisis</h2>
+          <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Protect from brain degeneration and the impact of stress</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+          <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-lg text-center">
+            <div class="inline-flex items-center justify-center w-10 sm:w-12 md:w-16 h-10 sm:h-12 md:h-16 bg-[#323956] rounded-xl sm:rounded-2xl mb-3 sm:mb-4">
+              <svg class="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+            </div>
+            <h3 class="text-2xl sm:text-3xl md:text-5xl font-bold text-[#323956] mb-2">62%</h3>
+            <h4 class="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3">Sleep Crisis</h4>
+            <p class="text-sm sm:text-base text-gray-700 leading-relaxed">Of adults worldwide report chronic sleep problems affecting their daily performance and mental health</p>
+          </div>
+          <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-lg text-center">
+            <div class="inline-flex items-center justify-center w-10 sm:w-12 md:w-16 h-10 sm:h-12 md:h-16 bg-[#F5D05D] rounded-xl sm:rounded-2xl mb-3 sm:mb-4">
+              <svg class="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="text-2xl sm:text-3xl md:text-5xl font-bold text-[#F5D05D] mb-2">77%</h3>
+            <h4 class="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3">Stress Epidemic</h4>
+            <p class="text-sm sm:text-base text-gray-700 leading-relaxed">Experience stress that impacts their physical and mental wellbeing on a regular basis</p>
+          </div>
+          <div class="bg-white rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-lg text-center sm:col-span-2 md:col-span-1">
+            <div class="inline-flex items-center justify-center w-10 sm:w-12 md:w-16 h-10 sm:h-12 md:h-16 bg-[#323956] rounded-xl sm:rounded-2xl mb-3 sm:mb-4">
+              <svg class="w-6 sm:w-7 md:w-8 h-6 sm:h-7 md:h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            </div>
+            <h3 class="text-2xl sm:text-3xl md:text-5xl font-bold text-[#323956] mb-2">1 in 4</h3>
+            <h4 class="text-lg sm:text-xl md:text-2xl font-semibold text-gray-900 mb-2 sm:mb-3">Mental Health</h4>
+            <p class="text-sm sm:text-base text-gray-700 leading-relaxed">People worldwide will experience a mental health challenge in their lifetime</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Solution -->
+      <div class="bg-gray-50 rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 mb-8 sm:mb-12 shadow-lg scroll-fade-up">
+        <div class="text-center mb-5 sm:mb-8">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#323956] mb-3 sm:mb-4">The Solution: NeuroSense</h2>
+        </div>
+        <div class="space-y-6">
+          <p class="text-base sm:text-lg text-gray-900 leading-relaxed font-normal">For the very first time, a clinical grade EEG combined with proprietary and globally validated brain assessment parameters to measure your true brain performance, trusted all over the world.</p>
+          <p class="text-base sm:text-lg text-gray-900 leading-relaxed font-semibold animate-brainwave text-center">Don't just track your bank balance, track your brain's balance.</p>
+        </div>
+      </div>
+
+      <!-- Philosophy -->
+      <div id="our-method" class="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-12 mb-8 sm:mb-12 shadow-lg scroll-fade-up">
+        <div class="text-center mb-5 sm:mb-8">
+          <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#323956] mb-4 sm:mb-6">Our Core Philosophy</h2>
+        </div>
+        <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl sm:rounded-2xl p-4 sm:p-6 mb-8 sm:mb-10">
+          <p class="text-base sm:text-lg leading-relaxed font-normal text-center">We blend ancient truths with modern scientific proofs to create a personalized <span class="font-bold">MOVERS protocol</span> integrating <span class="font-semibold">M</span>editation, <span class="font-semibold">O</span>xygenation (breathwork), <span class="font-semibold">V</span>isualization or Theta techniques, <span class="font-semibold">E</span>xercises, Affirmations, targeted <span class="font-semibold">R</span>elaxation and Nutrition, and <span class="font-semibold">S</span>leep or Stress Relief through HRV(Heart rate variability) for complete brain care.</p>
+        </div>
+        <div class="text-center">
+          <div class="flex items-center justify-center gap-4 text-2xl sm:text-3xl md:text-5xl font-light text-gray-900 mb-6 sm:mb-8">
+            <span class="font-semibold text-[#F5D05D] animate-neuron">3 M</span>
+          </div>
+          <div class="flex flex-row items-center justify-center gap-2 sm:gap-4 md:gap-8 text-base sm:text-xl md:text-3xl text-gray-900 flex-wrap">
+            <span class="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-gray-50 rounded-xl font-medium hover:text-[#F5D05D] hover:bg-gray-100 transition-all duration-500 cursor-pointer">Measure</span>
+            <span class="text-gray-400 text-sm sm:text-base">&amp;</span>
+            <span class="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-gray-50 rounded-xl font-medium hover:text-[#F5D05D] hover:bg-gray-100 transition-all duration-500 cursor-pointer">Monitor</span>
+            <span class="text-gray-400 text-sm sm:text-base">&amp;</span>
+            <span class="px-4 sm:px-6 md:px-8 py-2.5 sm:py-3 md:py-4 bg-gray-50 rounded-xl font-medium hover:text-[#F5D05D] hover:bg-gray-100 transition-all duration-500 cursor-pointer">Manage</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Care Section -->
+      <div class="mb-20">
+        <h2 class="text-5xl sm:text-6xl font-extrabold text-[#323956] mb-16 text-center scroll-fade-down">Care</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center max-w-7xl mx-auto">
+          <div class="scroll-fade-left"><img src="/care.jpeg" alt="Personalized brain care and optimization" class="w-full rounded-3xl shadow-2xl object-cover" /></div>
+          <div class="bg-white rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-lg scroll-fade-right">
+            <p class="text-base sm:text-lg leading-relaxed"><span class="font-bold">Build a personalized brain optimization plan tailored to your needs.</span> Leverage our lab tested brainwave frequencies, special sounds and music (mantras), ANS (Autonomic Nervous System) reset protocols, guided meditations, and targeted light and sound therapies. Track your progress, refine your plan, and sustain your gains with ongoing expert support. Available for both <span class="font-semibold">home and clinic based care</span>, depending on your requirements.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vision Section -->
+      <div class="py-10 sm:py-16 md:py-24 bg-gray-50 rounded-3xl px-4 sm:px-10 lg:px-16 mb-20">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-12 lg:gap-24 items-start">
+          <div class="scroll-fade-left">
+            <h2 class="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-normal text-gray-900 leading-relaxed sm:leading-snug">"I envision a world where brain health is understood early, nurtured intentionally, and optimized before breakdown begins."</h2>
+          </div>
+          <div class="scroll-fade-right">
+            <p class="text-xs sm:text-sm md:text-base text-gray-700 leading-relaxed mb-6 sm:mb-10">I believe neuroscience should move beyond disease to unlocking human potential, clarity, and emotional resilience. I am committed to integrating <span class="font-bold">science, technology, and awareness</span> to build conscious, high-performing brains. My purpose is to help every individual not just cope with life—but lead it with balance and purpose.</p>
+            <div class="mt-6 sm:mt-12">
+              <img src="/signiture.png" alt="Dr. Sweta Adatia Signature" class="h-10 sm:h-14 md:h-20 w-auto mb-4 sm:mb-6" />
+              <p class="text-sm sm:text-base font-bold text-gray-900">Dr. Sweta Adatia<span class="font-normal text-gray-600"> / Founder</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- About Dr. Sweta -->
+      <div class="mb-20">
+        <h2 class="text-2xl sm:text-4xl md:text-5xl font-extrabold text-[#323956] mb-4 text-left scroll-fade-left">About Dr. Sweta Adatia</h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+          <div class="bg-white rounded-3xl p-4 sm:p-6 md:p-10 shadow-lg scroll-fade-left">
+            <p class="text-lg text-[#323956] font-semibold mb-6">Neurologist | Author | TEDx Speaker | Coach | Entrepreneur | Spiritual Seeker</p>
+            <p class="text-base leading-relaxed mb-4 text-gray-700">Dr. Sweta Adatia is a dynamic and accomplished neurologist currently leading the Neurology department at Gargash Hospital in the UAE. With ten years of experience in the region, she previously served as the Medical Director of RAK Hospital for close to 4 years. Dr. Adatia completed her medical degree in Mumbai, India, followed by a paralytic stroke fellowship in Calgary, Canada. She is a fellow of the American College of Physicians, USA, and holds an impressive 13 Gold medals in various subjects.</p>
+            <div id="bio-extra" class="hidden">
+              <p class="text-base leading-relaxed mb-4 text-gray-700">Having worked across three continents – Asia, Central Africa, and North America – Dr. Adatia's global perspective enriches her medical practice. She pursued an MBA in Healthcare and finance at Cambridge University, where she was selected to work with the NCD UN on a funding program for 90 LMIC countries.</p>
+              <p class="text-base leading-relaxed mb-4 text-gray-700">Dr. Adatia's innovative work extends to mapping high achievers' brains through her Limitless Brain Lab in Dubai, utilizing AI algorithms to analyze the peak markers in the brain leading to success.</p>
+              <p class="text-base leading-relaxed mb-4 text-gray-700">A multi-talented individual, she has excelled in music with a Bachelor of Arts in harmonium, sports with table tennis championships, and spiritual pursuits including advanced training in Pranic Healing, Hypnotherapy, past life regression and Neurofeedback Therapy.</p>
+              <p class="text-base leading-relaxed mb-4 text-gray-700">Dr. Adatia empowers the next generation to map their brains through her startup Mylimitlessbrain. Her book FUTURE READY NOW has achieved global bestseller status on Amazon.</p>
+            </div>
+            <button onclick="document.getElementById('bio-extra').classList.toggle('hidden');this.textContent=this.textContent==='Read More'?'Read Less':'Read More'" class="mt-4 text-[#323956] font-semibold hover:underline text-sm">Read More</button>
+            <p class="text-base leading-relaxed text-gray-700 mt-4">More about her – <a href="https://www.drswetaadatia.com" target="_blank" rel="noopener noreferrer" class="text-[#323956] hover:underline font-semibold">www.drswetaadatia.com</a></p>
+            <!-- Stats -->
+            <div class="mt-6 pt-6 border-t border-gray-200">
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div class="flex flex-col items-center text-center">
+                  <svg class="w-10 h-10 sm:w-12 sm:h-12 text-[#323956] mb-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L1 9l4 2.18v6L12 21l7-3.82v-6l2-1.09V17h2V9L12 3zm6.82 6L12 12.72 5.18 9 12 5.28 18.82 9zM17 15.99l-5 2.73-5-2.73v-3.72L12 15l5-2.73v3.72z"/></svg>
+                  <h3 class="text-xl font-bold text-[#323956] mb-0.5">50000+</h3>
+                  <p class="text-[10px] text-gray-700 font-medium leading-tight">Patients Treated</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                  <svg class="w-10 h-10 sm:w-12 sm:h-12 text-[#323956] mb-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12 7a8 8 0 1 1 0 16 8 8 0 0 1 0-16zm0 2a6 6 0 1 0 0 12 6 6 0 0 0 0-12zm0 1.5l1.323 2.68 2.957.43-2.14 2.085.505 2.946L12 17.25l-2.645 1.39.505-2.945-2.14-2.086 2.957-.43L12 10.5zM18 2v3l-1.363 1.138A9.935 9.935 0 0 0 13 5.049V2h5zm-7-.001v3.05a9.935 9.935 0 0 0-3.637 1.088L6 5V2h5z"/></svg>
+                  <h3 class="text-xl font-bold text-[#323956] mb-0.5">13+</h3>
+                  <p class="text-[10px] text-gray-700 font-medium leading-tight">Gold Medals</p>
+                </div>
+                <div class="flex flex-col items-center text-center">
+                  <svg class="w-10 h-10 sm:w-12 sm:h-12 text-[#323956] mb-2" fill="currentColor" viewBox="0 0 24 24"><path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/></svg>
+                  <h3 class="text-xl font-bold text-[#323956] mb-0.5">30 Million +</h3>
+                  <p class="text-[10px] text-gray-700 font-medium leading-tight">Views Various social media</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="relative scroll-fade-right">
+            <div class="bg-white rounded-3xl overflow-hidden shadow-2xl h-full"><img src="/dr.sweta.JPG" alt="Dr. Sweta Adatia" class="w-full h-full object-cover" /></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============ CLINICAL OVERSIGHT ============ -->
+  <section class="py-14 sm:py-16 md:py-20 bg-white">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="inline-flex items-center gap-2.5 bg-[#323956] text-white text-sm sm:text-base font-medium px-6 py-2.5 rounded-full mb-8">
+        <svg class="w-5 h-5 text-[#c9a227]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+        Clinically Supervised
+      </div>
+      <p class="text-gray-500 text-base sm:text-lg md:text-xl mb-3">All protocols are supervised by</p>
+      <h3 class="text-[#323956] text-3xl sm:text-4xl md:text-5xl font-bold mb-2 sm:mb-3">Dr. Sweta Adatia</h3>
+      <p class="text-[#c9a227] text-base sm:text-lg md:text-xl font-semibold mb-6 sm:mb-8">Neurologist &amp; Brain Optimization Expert</p>
+      <p class="text-gray-500 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto mb-2">Every case is reviewed with clinical oversight.</p>
+      <p class="text-gray-500 text-base sm:text-lg leading-relaxed max-w-3xl mx-auto">Neuro-coaches, psychologists, and psychiatrists collaborate where required to ensure comprehensive care.</p>
+    </div>
+  </section>
+
+  <!-- ============ HOME SERVICE ============ -->
+  <section class="py-16 sm:py-20 md:py-24 bg-white relative overflow-hidden">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="scroll-fade-left">
+          <div class="inline-flex items-center gap-2 bg-[#323956] text-white text-xs sm:text-sm font-medium px-5 py-2 rounded-full mb-6">
+            <svg class="w-4 h-4 text-[#c9a227]" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+            Home Service
+          </div>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#323956] mb-5 tracking-tight leading-tight">We Are Coming to <span class="text-[#c9a227]">Your House</span></h2>
+          <p class="text-gray-500 text-base sm:text-lg mb-8 leading-relaxed">No need to travel. Our certified neuro-technicians bring the clinical-grade qEEG brain scan experience right to your doorstep.</p>
+          <div class="space-y-4">
+            <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-[#323956]/5 flex items-center justify-center flex-shrink-0 text-base">&#129504;</div><span class="text-[#323956] text-sm sm:text-base font-medium">FDA-cleared portable EEG equipment</span></div>
+            <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-[#323956]/5 flex items-center justify-center flex-shrink-0 text-base">&#127968;</div><span class="text-[#323956] text-sm sm:text-base font-medium">Certified neuro-technicians at your door</span></div>
+            <div class="flex items-center gap-3"><div class="w-8 h-8 rounded-lg bg-[#323956]/5 flex items-center justify-center flex-shrink-0 text-base">&#128202;</div><span class="text-[#323956] text-sm sm:text-base font-medium">Complete report within 48 hours</span></div>
+          </div>
+        </div>
+        <div class="scroll-fade-right">
+          <div class="space-y-5">
+            <div class="group flex items-start gap-5 bg-gray-50 hover:bg-white rounded-2xl p-5 sm:p-6 hover:shadow-lg border border-transparent hover:border-gray-200 transition-all duration-500">
+              <div class="relative flex-shrink-0">
+                <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-[#c9a227] flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-md">
+                  <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                </div>
+                <div class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-white border-2 border-[#c9a227] flex items-center justify-center text-[10px] font-bold text-[#323956]">1</div>
+              </div>
+              <div class="pt-1"><h3 class="text-[#323956] text-lg font-bold mb-1 group-hover:text-[#c9a227] transition-colors duration-300">Book a Slot</h3><p class="text-gray-400 text-sm leading-relaxed">Schedule a convenient time and our team will come to you.</p></div>
+            </div>
+            <div class="group flex items-start gap-5 bg-gray-50 hover:bg-white rounded-2xl p-5 sm:p-6 hover:shadow-lg border border-transparent hover:border-gray-200 transition-all duration-500">
+              <div class="relative flex-shrink-0">
+                <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-[#323956] flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-md">
+                  <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0h4"/></svg>
+                </div>
+                <div class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-white border-2 border-[#323956] flex items-center justify-center text-[10px] font-bold text-[#323956]">2</div>
+              </div>
+              <div class="pt-1"><h3 class="text-[#323956] text-lg font-bold mb-1 group-hover:text-[#c9a227] transition-colors duration-300">At-Home Scan</h3><p class="text-gray-400 text-sm leading-relaxed">A 20-minute painless qEEG scan in the comfort of your home.</p></div>
+            </div>
+            <div class="group flex items-start gap-5 bg-gray-50 hover:bg-white rounded-2xl p-5 sm:p-6 hover:shadow-lg border border-transparent hover:border-gray-200 transition-all duration-500">
+              <div class="relative flex-shrink-0">
+                <div class="w-10 h-10 sm:w-14 sm:h-14 rounded-2xl bg-[#c9a227] flex items-center justify-center text-white group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-md">
+                  <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </div>
+                <div class="absolute -top-1.5 -left-1.5 w-5 h-5 rounded-full bg-white border-2 border-[#c9a227] flex items-center justify-center text-[10px] font-bold text-[#323956]">3</div>
+              </div>
+              <div class="pt-1"><h3 class="text-[#323956] text-lg font-bold mb-1 group-hover:text-[#c9a227] transition-colors duration-300">Get Your Report</h3><p class="text-gray-400 text-sm leading-relaxed">Receive a detailed brain health report with expert recommendations.</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="bg-black text-white py-8 sm:py-12 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 sm:gap-6 md:gap-8">
+        <!-- Brand & Socials -->
+        <div class="space-y-4 sm:space-y-6 flex flex-col items-center sm:items-start">
+          <img src="/IBW Logo.png" alt="Limitless Brain Lab Logo" class="h-16 sm:h-24 md:h-32 w-16 sm:w-24 md:w-32 max-w-[80px] sm:max-w-[120px] md:max-w-none object-contain" />
+          <div class="w-full flex flex-col items-center sm:items-start">
+            <h3 class="text-xs sm:text-sm md:text-lg font-semibold text-gray-400 uppercase tracking-wider mb-3 sm:mb-4">Socials</h3>
+            <div class="flex gap-3">
+              <a href="https://www.linkedin.com/in/drswetaadatia/" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-8 sm:h-8 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors"><svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+              <a href="https://www.facebook.com/sweta.adatia" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-8 sm:h-8 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors"><svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+              <a href="https://www.youtube.com/@drsweta.adatia" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-8 sm:h-8 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors"><svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+              <a href="https://www.instagram.com/drsweta.adatia/?hl=en" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-8 sm:h-8 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors"><svg class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+              <a href="https://wa.me/971501382897" target="_blank" rel="noopener noreferrer" class="w-9 h-9 sm:w-8 sm:h-8 bg-gray-800 hover:bg-gray-700 rounded-full flex items-center justify-center transition-colors"><svg class="h-4 w-4" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+            </div>
+          </div>
+        </div>
+        <!-- Quick Links -->
+        <div class="space-y-3 sm:space-y-4">
+          <h3 class="text-sm sm:text-sm md:text-lg font-semibold text-gray-400 uppercase tracking-wider">Quick Links</h3>
+          <ul class="space-y-3">
+            <li><a href="#start" class="text-sm sm:text-sm md:text-base hover:text-[#F5D05D] transition-colors">Home</a></li>
+            <li><a href="#how-it-works" class="text-sm sm:text-sm md:text-base hover:text-[#F5D05D] transition-colors">How It Works</a></li>
+            <li><a href="#our-method" class="text-sm sm:text-sm md:text-base hover:text-[#F5D05D] transition-colors">Our Method</a></li>
+            <li><a href="https://www.drswetaadatia.com" target="_blank" rel="noopener noreferrer" class="text-sm sm:text-sm md:text-base hover:text-[#F5D05D] transition-colors">Dr. Sweta Adatia</a></li>
+          </ul>
+        </div>
+        <!-- Resources -->
+        <div class="space-y-3 sm:space-y-4">
+          <h3 class="text-sm sm:text-sm md:text-lg font-semibold text-gray-400 uppercase tracking-wider">Resources</h3>
+          <ul class="space-y-3">
+            <li><a href="https://www.limitlessbrainacademy.com" target="_blank" rel="noopener noreferrer" class="text-sm sm:text-sm md:text-base hover:text-[#F5D05D] transition-colors">Limitless Brain Academy</a></li>
+          </ul>
+          <div class="mt-6">
+            <a href="https://wa.me/971501382897?text=Hi%2C%20I%27m%20interested%20in%20Limitless%20Brain%20Lab%20services" target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-3 bg-[#323956] hover:bg-[#232D3C] text-white rounded-xl text-sm font-semibold transition-all duration-300 transform hover:scale-105 shadow-md">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 sm:mt-10 md:mt-12 pt-6 sm:pt-7 md:pt-8 border-t border-gray-800">
+        <div class="text-center"><p class="text-xs sm:text-sm md:text-base text-gray-400">&copy; 2025 Limitless Brain Lab. All rights reserved.</p></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- WhatsApp Floating Button -->
+  <a href="https://wa.me/971501382897" target="_blank" rel="noopener noreferrer" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300" aria-label="Chat on WhatsApp">
+    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- Scroll Animation Script -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+      document.querySelectorAll('.scroll-fade-up, .scroll-fade-down, .scroll-fade-left, .scroll-fade-right').forEach(function(el) {
+        observer.observe(el);
+      });
+    });
+  </script>
+
+</body>
+</html>
